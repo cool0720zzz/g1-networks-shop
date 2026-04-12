@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { ShoppingCart, User, Search } from "lucide-react";
 import { useCartStore } from "@/store/cart";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const count = useCartStore((s) => s.count());
@@ -42,8 +41,6 @@ export default function Header() {
             >
               잔액 <strong className="text-[#CC0000] font-bold">324,000원</strong>
             </Link>
-
-            <ThemeToggle />
 
             {/* Cart */}
             <Link

@@ -29,32 +29,9 @@
   --hero-grad: linear-gradient(135deg,#0A0A0A 0%,#1a0000 50%,#0A0A0A 100%);
 }
 
-/* ===== LIGHT THEME ===== */
-[data-theme="light"] {
-  --bg: #E2E2E7;
-  --bg-surface: #D8D8DD;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #F5F5F7;
-  --border: rgba(0,0,0,0.10);
-  --border-hover: rgba(204,0,0,0.35);
-  --text: #111111;
-  --text-sec: #444444;
-  --text-muted: #666666;
-  --text-dim: #999999;
-  --text-faint: #777777;
-  --nav-bg: rgba(226,226,231,0.95);
-  --footer-bg: #CCCCCE;
-  --input-bg: #ffffff;
-  --input-border: rgba(0,0,0,0.15);
-  --divider: rgba(0,0,0,0.06);
-  --shadow: 0 2px 8px rgba(0,0,0,0.10);
-  --hero-grad: linear-gradient(135deg,#E2E2E7 0%,#f5e0e0 50%,#E2E2E7 100%);
-}
-
 body {
   background: var(--bg);
   color: var(--text);
-  transition: background 0.35s, color 0.35s;
   font-feature-settings: "ss01";
 }
 
