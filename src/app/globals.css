@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand: #CC0000;
+  --color-brand-hover: #ee0000;
+  --color-green: #03C75A;
+  --color-amber: #FFD600;
+}
+
+/* ===== DARK THEME (default) ===== */
+:root {
+  --bg: #0A0A0A;
+  --bg-surface: #0f0f0f;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(204,0,0,0.3);
+  --text: #ffffff;
+  --text-sec: #888888;
+  --text-muted: #666666;
+  --text-dim: #444444;
+  --text-faint: #555555;
+  --nav-bg: rgba(10,10,10,0.95);
+  --footer-bg: #050505;
+  --input-bg: #141414;
+  --input-border: rgba(255,255,255,0.08);
+  --divider: rgba(255,255,255,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --hero-grad: linear-gradient(135deg,#0A0A0A 0%,#1a0000 50%,#0A0A0A 100%);
+}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] {
+  --bg: #E2E2E7;
+  --bg-surface: #D8D8DD;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F5F5F7;
+  --border: rgba(0,0,0,0.10);
+  --border-hover: rgba(204,0,0,0.35);
+  --text: #111111;
+  --text-sec: #444444;
+  --text-muted: #666666;
+  --text-dim: #999999;
+  --text-faint: #777777;
+  --nav-bg: rgba(226,226,231,0.95);
+  --footer-bg: #CCCCCE;
+  --input-bg: #ffffff;
+  --input-border: rgba(0,0,0,0.15);
+  --divider: rgba(0,0,0,0.06);
+  --shadow: 0 2px 8px rgba(0,0,0,0.10);
+  --hero-grad: linear-gradient(135deg,#E2E2E7 0%,#f5e0e0 50%,#E2E2E7 100%);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.35s, color 0.35s;
+  font-feature-settings: "ss01";
+}
+
+/* ===== HOVER EFFECTS ===== */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* Card hover - 밝아지는 효과 + 보더 강조 */
+a[class*="rounded"]:hover,
+div[class*="rounded"][style*="cursor"]:hover {
+  box-shadow: 0 4px 20px rgba(204, 0, 0, 0.15), var(--shadow);
+}
+
+/* Primary button hover - 더 밝게 + 위로 */
+.btn-hover-primary:hover,
+a[class*="bg-[#CC0000]"]:hover,
+button[class*="bg-[#CC0000]"]:hover {
+  background: #e81010 !important;
+  box-shadow: 0 6px 24px rgba(204, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Secondary button hover - 보더 빨강 + 살짝 밝게 */
+button[style*="var(--bg-card)"]:hover,
+a[style*="var(--bg-card)"]:hover {
+  border-color: rgba(204, 0, 0, 0.5) !important;
+  box-shadow: 0 4px 16px rgba(204, 0, 0, 0.12);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
