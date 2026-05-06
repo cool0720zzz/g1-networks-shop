@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
+import { useAuthStore } from "@/store/auth";
 
 const heroCards = [
   { icon: "🔧", title: "브레이크 패드", sub: "Brembo / TRW" },
@@ -28,6 +31,14 @@ const catCards = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+
+  // 로그인 상태면 자동으로 샵으로
+  useEffect(() => {
+    if (isLoggedIn) router.replace("/products");
+  }, [isLoggedIn, router]);
+
   return (
     <>
       {/* ===== 고정 배경 영상 (스티키, 1070px 중앙 정렬) ===== */}
@@ -62,11 +73,11 @@ export default function Home() {
               </span>
             </Link>
             <nav className="flex items-center gap-6">
-              <Link href="/products" className="text-sm text-white/60 transition-colors hover:text-[#CC0000]">상품 보기</Link>
-              <Link href="/charge" className="text-sm text-white/60 transition-colors hover:text-[#CC0000]">잔액 충전</Link>
+              <Link href="#brands" className="text-sm text-white/60 transition-colors hover:text-[#CC0000]">취급 브랜드</Link>
+              <Link href="#products" className="text-sm text-white/60 transition-colors hover:text-[#CC0000]">취급 상품</Link>
               <Link href="/login" className="text-sm text-white/60 transition-colors hover:text-[#CC0000]">로그인</Link>
-              <Link href="/products" className="bg-[#CC0000] text-white text-[13px] font-bold px-6 py-2.5 rounded-xl hover:bg-[#e00] transition-all">
-                주문하기
+              <Link href="/login" className="bg-[#CC0000] text-white text-[13px] font-bold px-6 py-2.5 rounded-xl hover:bg-[#e00] transition-all">
+                시작하기
               </Link>
             </nav>
           </div>
@@ -87,17 +98,17 @@ export default function Home() {
                 인증 정식 상품을<br />최저가로 만나보세요!
               </p>
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Link href="/products" className="bg-[#CC0000] text-white text-[17px] font-bold px-10 py-4 rounded-[14px] hover:bg-[#e00] hover:-translate-y-0.5 transition-all shadow-lg shadow-red-900/30">
-                  상품 둘러보기
+                <Link href="/login" className="bg-[#CC0000] text-white text-[17px] font-bold px-10 py-4 rounded-[14px] hover:bg-[#e00] hover:-translate-y-0.5 transition-all shadow-lg shadow-red-900/30">
+                  로그인하고 시작하기
                 </Link>
-                <Link href="/charge" className="text-[15px] font-semibold px-8 py-4 rounded-xl transition-all border border-white/20 hover:border-[#CC0000] text-white backdrop-blur-sm"
+                <Link href="#products" className="text-[15px] font-semibold px-8 py-4 rounded-xl transition-all border border-white/20 hover:border-[#CC0000] text-white backdrop-blur-sm"
                   style={{ background: "rgba(0,0,0,0.3)" }}>
-                  잔액 충전하기
+                  취급 상품 보기
                 </Link>
               </div>
             </div>
 
-            <div className="w-[340px] shrink-0">
+            <div className="w-[340px] shrink-0 lg:pr-6">
               <div className="grid grid-cols-2 gap-3">
                 {heroCards.map((c) => (
                   <Link key={c.title} href="/products"

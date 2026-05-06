@@ -2,6 +2,9 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AuthGuard from "@/components/AuthGuard";
+import { useAuthStore } from "@/store/auth";
+import { formatPrice } from "@/data/products";
 
 const chargeOptions = [
   { pay: 110000, charge: 100000, vat: 10000 },
@@ -14,9 +17,26 @@ const payMethods = ["신용/체크카드", "계좌이체", "무통장입금"];
 const payMethodSub = ["PG 결제", "실시간 이체", "가상계좌"];
 
 export default function ChargePage() {
+  return (
+    <AuthGuard>
+      <ChargeContent />
+    </AuthGuard>
+  );
+}
+
+function ChargeContent() {
+  const user = useAuthStore((s) => s.user);
+  const setBalance = useAuthStore((s) => s.setBalance);
   const [selected, setSelected] = useState(1);
   const [payMethod, setPayMethod] = useState(0);
   const opt = chargeOptions[selected];
+  const balance = user?.balance ?? 0;
+
+  const handleCharge = () => {
+    if (!confirm(`${formatPrice(opt.pay)} 결제 후 ${formatPrice(opt.charge)}를 충전합니다.\n진행하시겠습니까?`)) return;
+    setBalance(balance + opt.charge);
+    alert("충전이 완료되었습니다!");
+  };
 
   return (
     <>
@@ -29,13 +49,11 @@ export default function ChargePage() {
             <p className="text-sm" style={{ color: "var(--text-muted)" }}>선결제 금액을 충전하여 간편하게 주문하세요</p>
           </div>
 
-          {/* Balance */}
           <div className="rounded-2xl p-8 text-center mb-8" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
             <p className="text-[13px] mb-1" style={{ color: "var(--text-sec)" }}>현재 잔액</p>
-            <div className="text-[40px] font-black text-[#03C75A]">324,000<small className="text-base" style={{ color: "var(--text-muted)" }}>원</small></div>
+            <div className="text-[40px] font-black text-[#03C75A]">{balance.toLocaleString("ko-KR")}<small className="text-base" style={{ color: "var(--text-muted)" }}>원</small></div>
           </div>
 
-          {/* Options */}
           <h3 className="text-base font-bold mb-4" style={{ color: "var(--text)" }}>충전 금액 선택</h3>
           <div className="grid grid-cols-2 gap-3 mb-6">
             {chargeOptions.map((o, i) => (
@@ -52,16 +70,14 @@ export default function ChargePage() {
             ))}
           </div>
 
-          {/* Note */}
           <div className="rounded-lg p-4 text-xs leading-relaxed mb-6" style={{ background: "rgba(255,214,0,0.05)", border: "1px solid rgba(255,214,0,0.15)", color: "var(--text-sec)" }}>
-            <strong className="text-[#FFD600]">&#9888; 충전 안내</strong><br />
+            <strong className="text-[#FFD600]">⚠ 충전 안내</strong><br />
             - 충전 금액은 부가세(10%)가 포함된 금액입니다<br />
             - 부가세를 제외한 금액이 잔액에 충전됩니다<br />
             - 잔액이 10만원 미만일 경우 상품 구매가 제한됩니다<br />
             - 세금계산서는 매월 말 자동 발행됩니다
           </div>
 
-          {/* Payment method */}
           <h3 className="text-base font-bold mb-4" style={{ color: "var(--text)" }}>결제 수단</h3>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             {payMethods.map((m, i) => (
@@ -77,7 +93,7 @@ export default function ChargePage() {
             ))}
           </div>
 
-          <button className="w-full bg-[#CC0000] text-white text-base font-bold py-4.5 rounded-xl hover:bg-[#e00] transition-all">
+          <button onClick={handleCharge} className="w-full bg-[#CC0000] text-white text-base font-bold py-4 rounded-xl hover:bg-[#e00] transition-all">
             {(opt.pay / 10000).toLocaleString()}만원 결제하고 {(opt.charge / 10000).toLocaleString()}만원 충전하기
           </button>
         </div>

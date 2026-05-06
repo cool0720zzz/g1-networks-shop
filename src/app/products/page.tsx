@@ -3,12 +3,25 @@ import { useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { products, brands, formatPrice } from "@/data/products";
+import AuthGuard from "@/components/AuthGuard";
+import { products, brands, formatPrice, getPrice } from "@/data/products";
+import { useAuthStore, gradeLabel } from "@/store/auth";
 
 const categoryFilters = ["전체", "브레이크 패드", "브레이크 디스크", "필터", "엔진오일"];
 const catMap: Record<string, string> = { "브레이크 패드": "brake-pad", "브레이크 디스크": "brake-disc", "필터": "filter", "엔진오일": "engine-oil" };
 
 export default function ProductsPage() {
+  return (
+    <AuthGuard>
+      <ProductsContent />
+    </AuthGuard>
+  );
+}
+
+function ProductsContent() {
+  const user = useAuthStore((s) => s.user);
+  const grade = user?.grade ?? "retail";
+
   const [activeCat, setActiveCat] = useState("전체");
   const [activeBrands, setActiveBrands] = useState<string[]>([]);
   const [sort, setSort] = useState("popular");
@@ -20,8 +33,8 @@ export default function ProductsPage() {
   });
 
   const sorted = [...filtered].sort((a, b) => {
-    if (sort === "price-asc") return a.price - b.price;
-    if (sort === "price-desc") return b.price - a.price;
+    if (sort === "price-asc") return getPrice(a, grade) - getPrice(b, grade);
+    if (sort === "price-desc") return getPrice(b, grade) - getPrice(a, grade);
     return 0;
   });
 
@@ -36,12 +49,19 @@ export default function ProductsPage() {
           <div className="text-center mb-10">
             <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Products</span>
             <h1 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>상품 목록</h1>
+            {user && (
+              <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+                <strong style={{ color: user.grade === "wholesale" ? "#ff5555" : "#03C75A" }}>
+                  {gradeLabel[user.grade]}
+                </strong>
+                {" "}회원가로 표시 중입니다
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Sidebar */}
             <aside className="w-full lg:w-60 shrink-0 space-y-4">
-              {/* Category */}
               <div className="rounded-xl p-5" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
                 <h3 className="text-[13px] font-bold text-[#CC0000] tracking-wider uppercase mb-3">카테고리</h3>
                 {categoryFilters.map((c) => (
@@ -56,7 +76,6 @@ export default function ProductsPage() {
                   </button>
                 ))}
               </div>
-              {/* Brand */}
               <div className="rounded-xl p-5" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
                 <h3 className="text-[13px] font-bold text-[#CC0000] tracking-wider uppercase mb-3">브랜드</h3>
                 {brands.map((b) => (
@@ -99,7 +118,7 @@ export default function ProductsPage() {
                       <div className="text-[11px] text-[#CC0000] font-semibold tracking-wider uppercase mb-1">{p.brand}</div>
                       <div className="text-sm font-semibold mb-1 leading-snug" style={{ color: "var(--text)" }}>{p.name}</div>
                       <div className="text-[11px] mb-2" style={{ color: "var(--text-muted)" }}>{p.partNumbers.join(" / ")}</div>
-                      <div className="text-lg font-black text-[#CC0000]">{formatPrice(p.price)}</div>
+                      <div className="text-lg font-black text-[#CC0000]">{formatPrice(getPrice(p, grade))}</div>
                       <div className="flex gap-1 flex-wrap mt-2">
                         {p.compatibleVehicles.map((v) => (
                           <span key={v} className="text-[10px] px-2 py-0.5 rounded" style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)", color: "var(--text-sec)" }}>{v}</span>

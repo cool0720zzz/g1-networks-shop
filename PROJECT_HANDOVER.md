@@ -89,7 +89,7 @@ PG 결제 (카드/계좌이체/무통장) → 부가세 제외 금액 잔액 충
 
 ---
 
-## 6. 회원 등급 시스템 (구현 예정)
+## 6. 회원 등급 시스템 (Mock 구현 완료)
 
 | | 도매 (사업자) | 소매 (일반) |
 |---|---|---|
@@ -98,7 +98,23 @@ PG 결제 (카드/계좌이체/무통장) → 부가세 제외 금액 잔액 충
 | 가격 | 도매가만 표시 | 소매가만 표시 |
 | 상대 가격 | 소매가 비노출 | 도매가 비노출 |
 
-**주의:** 가격 필터링은 반드시 서버 사이드에서 처리해야 함 (프론트에서만 숨기면 개발자도구로 노출)
+**현재 구현 상태:**
+- Auth store (`src/store/auth.ts`)에 `UserGrade = "wholesale" | "retail"` 타입 정의
+- Product 인터페이스에 `prices: { wholesale, retail }` 분리 저장
+- `getPrice(product, grade)` 헬퍼로 등급별 가격 조회
+- AuthGuard 컴포넌트로 보호된 라우트 가드
+- localStorage persist (zustand persist middleware)
+
+**데모 계정:**
+- 도매: ID `wholesale` / PW `1234` (잔액 324,000원)
+- 소매: ID `retail` / PW `1234` (잔액 150,000원)
+
+**라우팅 구조:**
+- `/` - 랜딩 페이지 (로그인 시 자동 `/products`로 리다이렉트)
+- `/login` - 로그인 페이지 (공개)
+- `/products`, `/products/[id]`, `/cart`, `/charge`, `/mypage` - AuthGuard로 보호
+
+**⚠ 백엔드 연동 시 주의:** 가격 필터링은 반드시 서버 사이드에서 처리. 현재 프론트 Mock은 데모용으로만 사용. 실제 프로덕션에서는 API에서 사용자 등급에 맞는 가격만 응답하도록 구현 필수.
 
 ---
 

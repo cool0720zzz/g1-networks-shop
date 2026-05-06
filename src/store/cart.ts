@@ -1,6 +1,8 @@
 "use client";
 import { create } from "zustand";
 import type { Product } from "@/data/products";
+import { getPrice } from "@/data/products";
+import type { UserGrade } from "@/store/auth";
 
 export interface CartItem {
   product: Product;
@@ -13,7 +15,8 @@ interface CartStore {
   remove: (productId: string) => void;
   updateQty: (productId: string, qty: number) => void;
   clear: () => void;
-  total: () => number;
+  /** 등급별 가격 기준 합계 */
+  total: (grade: UserGrade | null | undefined) => number;
   count: () => number;
 }
 
@@ -37,6 +40,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       items: s.items.map((i) => (i.product.id === id ? { ...i, qty: Math.max(1, qty) } : i)),
     })),
   clear: () => set({ items: [] }),
-  total: () => get().items.reduce((sum, i) => sum + i.product.price * i.qty, 0),
+  total: (grade) =>
+    get().items.reduce((sum, i) => sum + getPrice(i.product, grade) * i.qty, 0),
   count: () => get().items.reduce((sum, i) => sum + i.qty, 0),
 }));
