@@ -124,11 +124,52 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ===== [V2 NEW] B2B 신뢰 신호 섹션 (히어로 직하단) ===== */}
+        <section className="px-6 py-12 backdrop-blur-md" style={{ background: "rgba(0,0,0,0.55)", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+          <div className="max-w-[1070px] mx-auto">
+            {/* 파트너 로고 바 */}
+            <div className="text-center mb-8">
+              <p className="text-[11px] font-bold tracking-[3px] uppercase text-white/50 mb-5">
+                ★ 정식 수입 인증 파트너 (Authorized Distributors)
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {[
+                  { logo: "BREMBO", desc: "Italy" },
+                  { logo: "TRW", desc: "Germany" },
+                  { logo: "MANN-FILTER", desc: "Germany" },
+                  { logo: "ZF", desc: "Germany" },
+                ].map((p) => (
+                  <div key={p.logo}
+                    className="rounded-xl py-4 text-center transition-all hover:-translate-y-0.5"
+                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(10px)" }}>
+                    <div className="text-[13px] font-extrabold tracking-wider text-white">{p.logo}</div>
+                    <div className="text-[9px] tracking-widest uppercase text-white/40 mt-0.5">{p.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 거래량 카운터 */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+              {[
+                { val: "500+", label: "가입 정비소" },
+                { val: "12만+", label: "누적 주문" },
+                { val: "24h", label: "당일 출고" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <div className="text-2xl sm:text-3xl font-black text-[#CC0000]">{s.val}</div>
+                  <div className="text-[11px] sm:text-xs text-white/50 mt-1">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ===== 여기부터 반투명 배경 섹션들 (영상이 살짝 비침) ===== */}
         <div className="backdrop-blur-sm" style={{ background: "rgba(10,10,10,0.72)" }}>
 
           {/* Brands */}
-          <section className="py-20 px-6">
+          <section className="py-20 px-6" id="brands">
             <div className="max-w-[1070px] mx-auto">
               <div className="text-center mb-12">
                 <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Authorized Brands</span>
@@ -156,8 +197,42 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Categories */}
+          {/* [V2 NEW] Testimonials — 정비소 후기 */}
           <section className="py-20 px-6">
+            <div className="max-w-[1070px] mx-auto">
+              <div className="text-center mb-12">
+                <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Testimonials</span>
+                <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>정비소가 선택한 이유</h2>
+                <p className="text-sm" style={{ color: "var(--text-muted)" }}>이미 사용 중인 정비소들의 생생한 후기</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { quote: "정식 수입 부품을 도매가로 받을 수 있어서 마진율이 확실히 좋아졌습니다. 당일 출고도 빨라요.", who: "서울 강남구 · OO모터스", grade: "도매" },
+                  { quote: "차종 검색이 쉬워서 손님 차에 맞는 부품 찾는 시간이 절반으로 줄었습니다.", who: "경기 분당구 · OO카서비스", grade: "도매" },
+                  { quote: "선충전 잔액 시스템이라 매번 결제 안 해도 되고 세금계산서까지 깔끔하게 처리됩니다.", who: "인천 남동구 · OO자동차정비", grade: "도매" },
+                ].map((t, i) => (
+                  <div key={i}
+                    className="rounded-2xl p-6 transition-all hover:-translate-y-1 hover:border-[rgba(204,0,0,0.3)]"
+                    style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+                    <div className="text-2xl text-[#CC0000] mb-3 font-black">"</div>
+                    <p className="text-[14px] leading-relaxed mb-5" style={{ color: "var(--text)" }}>
+                      {t.quote}
+                    </p>
+                    <div className="flex items-center justify-between pt-4" style={{ borderTop: "1px solid var(--divider)" }}>
+                      <span className="text-[12px]" style={{ color: "var(--text-muted)" }}>{t.who}</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md"
+                        style={{ background: "rgba(204,0,0,0.15)", color: "#ff5555" }}>
+                        {t.grade}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Categories */}
+          <section className="py-20 px-6" id="products">
             <div className="text-center mb-12">
               <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Products</span>
               <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>취급 상품</h2>

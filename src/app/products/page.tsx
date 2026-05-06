@@ -4,6 +4,8 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthGuard from "@/components/AuthGuard";
+import VehicleSearch from "@/components/VehicleSearch";
+import AccountPanel from "@/components/AccountPanel";
 import { products, brands, formatPrice, getPrice } from "@/data/products";
 import { useAuthStore, gradeLabel } from "@/store/auth";
 
@@ -45,18 +47,26 @@ function ProductsContent() {
       <Header />
       <main className="flex-1 px-6 py-8">
         <div className="max-w-[1070px] mx-auto">
+
+          {/* [V2 NEW] 내 계정 미니 패널 */}
+          <AccountPanel />
+
+          {/* [V2 NEW] 차종 빠른 검색 위젯 */}
+          <VehicleSearch />
+
           {/* Title */}
-          <div className="text-center mb-10">
-            <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Products</span>
-            <h1 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>상품 목록</h1>
-            {user && (
-              <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                <strong style={{ color: user.grade === "wholesale" ? "#ff5555" : "#03C75A" }}>
-                  {gradeLabel[user.grade]}
-                </strong>
-                {" "}회원가로 표시 중입니다
-              </p>
-            )}
+          <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
+            <div>
+              <h2 className="text-xl font-black" style={{ color: "var(--text)" }}>전체 상품</h2>
+              {user && (
+                <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                  <strong style={{ color: user.grade === "wholesale" ? "#ff5555" : "#03C75A" }}>
+                    {gradeLabel[user.grade]}
+                  </strong>
+                  {" "}회원가로 표시 중
+                </p>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
@@ -107,26 +117,59 @@ function ProductsContent() {
                 </select>
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                {sorted.map((p) => (
-                  <Link key={p.id} href={`/products/${p.id}`}
-                    className="rounded-2xl overflow-hidden transition-all hover:-translate-y-1 hover:border-[rgba(204,0,0,0.3)]"
-                    style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
-                    <div className="h-48 flex items-center justify-center text-xs" style={{ background: "var(--bg-card-hover)", color: "var(--text-dim)" }}>
-                      {p.brand} IMAGE
-                    </div>
-                    <div className="p-4">
-                      <div className="text-[11px] text-[#CC0000] font-semibold tracking-wider uppercase mb-1">{p.brand}</div>
-                      <div className="text-sm font-semibold mb-1 leading-snug" style={{ color: "var(--text)" }}>{p.name}</div>
-                      <div className="text-[11px] mb-2" style={{ color: "var(--text-muted)" }}>{p.partNumbers.join(" / ")}</div>
-                      <div className="text-lg font-black text-[#CC0000]">{formatPrice(getPrice(p, grade))}</div>
-                      <div className="flex gap-1 flex-wrap mt-2">
-                        {p.compatibleVehicles.map((v) => (
-                          <span key={v} className="text-[10px] px-2 py-0.5 rounded" style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)", color: "var(--text-sec)" }}>{v}</span>
-                        ))}
+                {sorted.map((p) => {
+                  // [V2 NEW] 도매 회원에게는 절약 금액도 함께 표시
+                  const myPrice = getPrice(p, grade);
+                  const showSaving = grade === "wholesale" && p.prices.retail > p.prices.wholesale;
+                  const saving = p.prices.retail - p.prices.wholesale;
+
+                  return (
+                    <Link key={p.id} href={`/products/${p.id}`}
+                      className="rounded-2xl overflow-hidden transition-all hover:-translate-y-1 hover:border-[rgba(204,0,0,0.3)]"
+                      style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+                      <div className="h-48 flex items-center justify-center text-xs relative" style={{ background: "var(--bg-card-hover)", color: "var(--text-dim)" }}>
+                        {p.brand} IMAGE
+                        {showSaving && (
+                          <span
+                            className="absolute top-2 right-2 text-[10px] font-bold px-2 py-1 rounded-md"
+                            style={{ background: "rgba(204,0,0,0.95)", color: "white" }}
+                          >
+                            도매가 -{Math.round((saving / p.prices.retail) * 100)}%
+                          </span>
+                        )}
                       </div>
-                    </div>
-                  </Link>
-                ))}
+                      <div className="p-4">
+                        <div className="text-[11px] text-[#CC0000] font-semibold tracking-wider uppercase mb-1">{p.brand}</div>
+                        <div className="text-sm font-semibold mb-1 leading-snug" style={{ color: "var(--text)" }}>{p.name}</div>
+                        <div className="text-[11px] mb-2" style={{ color: "var(--text-muted)" }}>{p.partNumbers.join(" / ")}</div>
+                        {/* [V2] 등급 라벨 + 가격 + (도매면 소매가 비교) */}
+                        <div className="flex items-baseline gap-2">
+                          <span
+                            className="text-[9px] font-bold px-1.5 py-0.5 rounded"
+                            style={{
+                              background: grade === "wholesale" ? "rgba(204,0,0,0.15)" : "rgba(3,199,90,0.15)",
+                              color: grade === "wholesale" ? "#ff5555" : "#03C75A",
+                            }}
+                          >
+                            {gradeLabel[grade]}가
+                          </span>
+                          <span className="text-lg font-black text-[#CC0000]">{formatPrice(myPrice)}</span>
+                        </div>
+                        {showSaving && (
+                          <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+                            <span className="line-through">{formatPrice(p.prices.retail)}</span>
+                            {" "}→ <strong style={{ color: "#03C75A" }}>{formatPrice(saving)} 절약</strong>
+                          </div>
+                        )}
+                        <div className="flex gap-1 flex-wrap mt-2">
+                          {p.compatibleVehicles.map((v) => (
+                            <span key={v} className="text-[10px] px-2 py-0.5 rounded" style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)", color: "var(--text-sec)" }}>{v}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
