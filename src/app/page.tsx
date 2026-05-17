@@ -95,7 +95,7 @@ export default function Home() {
                 <em className="not-italic text-[#CC0000]">수입차 부품</em><br />공식 판매점
               </h1>
               <p className="text-lg leading-relaxed mb-10 text-white/60">
-                인증 정식 상품을<br />최저가로 만나보세요!
+                인증 정식 상품을<br />도매가로 만나보세요!
               </p>
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link href="/login" className="bg-[#CC0000] text-white text-[17px] font-bold px-10 py-4 rounded-[14px] hover:bg-[#e00] hover:-translate-y-0.5 transition-all shadow-lg shadow-red-900/30">
@@ -149,19 +149,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 거래량 카운터 */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-              {[
-                { val: "500+", label: "가입 정비소" },
-                { val: "12만+", label: "누적 주문" },
-                { val: "24h", label: "당일 출고" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-black text-[#CC0000]">{s.val}</div>
-                  <div className="text-[11px] sm:text-xs text-white/50 mt-1">{s.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -203,30 +190,11 @@ export default function Home() {
               <div className="text-center mb-12">
                 <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Testimonials</span>
                 <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>정비소가 선택한 이유</h2>
-                <p className="text-sm" style={{ color: "var(--text-muted)" }}>이미 사용 중인 정비소들의 생생한 후기</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  { quote: "정식 수입 부품을 도매가로 받을 수 있어서 마진율이 확실히 좋아졌습니다. 당일 출고도 빨라요.", who: "서울 강남구 · OO모터스", grade: "도매" },
-                  { quote: "차종 검색이 쉬워서 손님 차에 맞는 부품 찾는 시간이 절반으로 줄었습니다.", who: "경기 분당구 · OO카서비스", grade: "도매" },
-                  { quote: "선충전 잔액 시스템이라 매번 결제 안 해도 되고 세금계산서까지 깔끔하게 처리됩니다.", who: "인천 남동구 · OO자동차정비", grade: "도매" },
-                ].map((t, i) => (
-                  <div key={i}
-                    className="rounded-2xl p-6 transition-all hover:-translate-y-1 hover:border-[rgba(204,0,0,0.3)]"
-                    style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
-                    <div className="text-2xl text-[#CC0000] mb-3 font-black">"</div>
-                    <p className="text-[14px] leading-relaxed mb-5" style={{ color: "var(--text)" }}>
-                      {t.quote}
-                    </p>
-                    <div className="flex items-center justify-between pt-4" style={{ borderTop: "1px solid var(--divider)" }}>
-                      <span className="text-[12px]" style={{ color: "var(--text-muted)" }}>{t.who}</span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md"
-                        style={{ background: "rgba(204,0,0,0.15)", color: "#ff5555" }}>
-                        {t.grade}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+              <div className="text-center py-12 rounded-2xl" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+                <p className="text-[15px]" style={{ color: "var(--text-muted)" }}>
+                  준비 중입니다. 곧 실제 고객 후기를 만나보실 수 있습니다.
+                </p>
               </div>
             </div>
           </section>
@@ -236,7 +204,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Products</span>
               <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>취급 상품</h2>
-              <p className="text-sm" style={{ color: "var(--text-muted)" }}>인증 정식 수입차 부품을 최저가로 제공합니다</p>
+              <p className="text-sm" style={{ color: "var(--text-muted)" }}>인증 정식 수입차 부품을 도매가로 제공합니다</p>
             </div>
             <div className="max-w-[1070px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
               {catCards.map((c) => (
@@ -262,7 +230,7 @@ export default function Home() {
               style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
               <h2 className="text-[28px] font-black mb-3" style={{ color: "var(--text)" }}>지금 바로 시작하세요</h2>
               <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--text-sec)" }}>
-                선충전 시스템으로 간편하게 주문하고<br />최저가로 수입차 부품을 만나보세요.
+                선충전 시스템으로 간편하게 주문하고<br />도매가로 수입차 부품을 만나보세요.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/login" className="bg-[#CC0000] text-white text-[17px] font-bold px-10 py-4 rounded-[14px] hover:bg-[#e00] transition-all">

@@ -114,7 +114,8 @@ function ProductDetailContent() {
                   {canPurchase ? "바로 구매" : "잔액 부족"}
                 </button>
                 <button onClick={() => addToCart(product, qty)}
-                  className="px-6 py-4 rounded-xl text-base font-semibold flex items-center gap-2 transition-all border border-[var(--border)] hover:border-[#CC0000]"
+                  disabled={!canPurchase}
+                  className="px-6 py-4 rounded-xl text-base font-semibold flex items-center gap-2 transition-all border border-[var(--border)] hover:border-[#CC0000] disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ background: "var(--bg-card)", color: "var(--text)" }}>
                   <ShoppingCart size={18} /> 장바구니
                 </button>

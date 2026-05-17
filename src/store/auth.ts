@@ -25,6 +25,8 @@ interface AuthStore {
   // Mock 전용: 데모용 빠른 등급 전환
   switchGrade: (grade: UserGrade) => void;
   setBalance: (balance: number) => void;
+  deductBalance: (amount: number) => boolean;
+  chargeBalance: (amount: number) => void;
 }
 
 // Mock 사용자 데이터
@@ -77,6 +79,18 @@ export const useAuthStore = create<AuthStore>()(
         set((s) => (s.user ? { user: { ...s.user, grade } } : s)),
       setBalance: (balance) =>
         set((s) => (s.user ? { user: { ...s.user, balance } } : s)),
+      deductBalance: (amount) => {
+        let success = false;
+        set((s) => {
+          if (!s.user) return s;
+          if (s.user.balance < amount) return s;
+          success = true;
+          return { user: { ...s.user, balance: s.user.balance - amount } };
+        });
+        return success;
+      },
+      chargeBalance: (amount) =>
+        set((s) => (s.user ? { user: { ...s.user, balance: s.user.balance + amount } } : s)),
     }),
     {
       name: "g1-auth-storage",

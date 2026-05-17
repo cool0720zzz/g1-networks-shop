@@ -26,16 +26,19 @@ export default function ChargePage() {
 
 function ChargeContent() {
   const user = useAuthStore((s) => s.user);
-  const setBalance = useAuthStore((s) => s.setBalance);
+  const chargeBalance = useAuthStore((s) => s.chargeBalance);
   const [selected, setSelected] = useState(1);
   const [payMethod, setPayMethod] = useState(0);
+  const [loading, setLoading] = useState(false);
   const opt = chargeOptions[selected];
   const balance = user?.balance ?? 0;
 
-  const handleCharge = () => {
+  const handleCharge = async () => {
     if (!confirm(`${formatPrice(opt.pay)} 결제 후 ${formatPrice(opt.charge)}를 충전합니다.\n진행하시겠습니까?`)) return;
-    setBalance(balance + opt.charge);
+    setLoading(true);
+    chargeBalance(opt.charge);
     alert("충전이 완료되었습니다!");
+    setLoading(false);
   };
 
   return (
@@ -93,8 +96,8 @@ function ChargeContent() {
             ))}
           </div>
 
-          <button onClick={handleCharge} className="w-full bg-[#CC0000] text-white text-base font-bold py-4 rounded-xl hover:bg-[#e00] transition-all">
-            {(opt.pay / 10000).toLocaleString()}만원 결제하고 {(opt.charge / 10000).toLocaleString()}만원 충전하기
+          <button onClick={handleCharge} disabled={loading} className="w-full bg-[#CC0000] text-white text-base font-bold py-4 rounded-xl hover:bg-[#e00] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+            {loading ? "충전 중..." : `${(opt.pay / 10000).toLocaleString()}만원 결제하고 ${(opt.charge / 10000).toLocaleString()}만원 충전하기`}
           </button>
         </div>
       </main>

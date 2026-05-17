@@ -17,9 +17,9 @@
   --border-hover: rgba(204,0,0,0.3);
   --text: #ffffff;
   --text-sec: #888888;
-  --text-muted: #666666;
+  --text-muted: #909090;
   --text-dim: #444444;
-  --text-faint: #555555;
+  --text-faint: #7a7a7a;
   --nav-bg: rgba(10,10,10,0.95);
   --footer-bg: #050505;
   --input-bg: #141414;
@@ -27,6 +27,10 @@
   --divider: rgba(255,255,255,0.04);
   --shadow: 0 1px 3px rgba(0,0,0,0.3);
   --hero-grad: linear-gradient(135deg,#0A0A0A 0%,#1a0000 50%,#0A0A0A 100%);
+  --color-wholesale: #ff5555;
+  --color-retail: #03C75A;
+  --color-wholesale-bg: rgba(204,0,0,0.15);
+  --color-retail-bg: rgba(3,199,90,0.15);
 }
 
 body {
@@ -50,7 +54,7 @@ div[class*="rounded"][style*="cursor"]:hover {
 .btn-hover-primary:hover,
 a[class*="bg-[#CC0000]"]:hover,
 button[class*="bg-[#CC0000]"]:hover {
-  background: #e81010 !important;
+  background: var(--color-brand-hover) !important;
   box-shadow: 0 6px 24px rgba(204, 0, 0, 0.35);
   transform: translateY(-2px);
 }
@@ -66,3 +70,15 @@ a[style*="var(--bg-card)"]:hover {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 3px; }
+
+/* Focus ring - WCAG AA */
+:focus-visible {
+  outline: 2px solid #CC0000;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline-offset: 0;
+}

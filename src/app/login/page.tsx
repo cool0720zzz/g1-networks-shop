@@ -196,36 +196,38 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* 데모 빠른 로그인 */}
-          <div
-            className="mt-6 rounded-xl p-4"
-            style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
-          >
-            <p className="text-[11px] font-bold mb-3 tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
-              🎮 데모 빠른 로그인
-            </p>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => quickLogin("wholesale")}
-                className="rounded-lg py-2.5 text-[13px] font-bold transition-all"
-                style={{ background: "rgba(204,0,0,0.1)", border: "1px solid rgba(204,0,0,0.3)", color: "#ff5555" }}
-              >
-                도매 계정 진입
-              </button>
-              <button
-                type="button"
-                onClick={() => quickLogin("retail")}
-                className="rounded-lg py-2.5 text-[13px] font-bold transition-all"
-                style={{ background: "rgba(3,199,90,0.1)", border: "1px solid rgba(3,199,90,0.3)", color: "#03C75A" }}
-              >
-                소매 계정 진입
-              </button>
+          {/* 데모 빠른 로그인 — 개발 환경에서만 노출 */}
+          {process.env.NODE_ENV === "development" && (
+            <div
+              className="mt-6 rounded-xl p-4"
+              style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
+            >
+              <p className="text-[11px] font-bold mb-3 tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
+                🎮 데모 빠른 로그인
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => quickLogin("wholesale")}
+                  className="rounded-lg py-2.5 text-[13px] font-bold transition-all"
+                  style={{ background: "rgba(204,0,0,0.1)", border: "1px solid rgba(204,0,0,0.3)", color: "#ff5555" }}
+                >
+                  도매 계정 진입
+                </button>
+                <button
+                  type="button"
+                  onClick={() => quickLogin("retail")}
+                  className="rounded-lg py-2.5 text-[13px] font-bold transition-all"
+                  style={{ background: "rgba(3,199,90,0.1)", border: "1px solid rgba(3,199,90,0.3)", color: "#03C75A" }}
+                >
+                  소매 계정 진입
+                </button>
+              </div>
+              <p className="text-[10px] mt-2" style={{ color: "var(--text-dim)" }}>
+                ID: wholesale / retail · PW: 1234
+              </p>
             </div>
-            <p className="text-[10px] mt-2" style={{ color: "var(--text-dim)" }}>
-              ID: wholesale / retail · PW: 1234
-            </p>
-          </div>
+          )}
         </div>
       </main>
       <Footer />

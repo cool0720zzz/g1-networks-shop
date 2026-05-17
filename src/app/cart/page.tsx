@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthGuard from "@/components/AuthGuard";
@@ -17,9 +18,10 @@ export default function CartPage() {
 }
 
 function CartContent() {
+  const router = useRouter();
   const { items, remove, updateQty, total, clear } = useCartStore();
   const user = useAuthStore((s) => s.user);
-  const setBalance = useAuthStore((s) => s.setBalance);
+  const deductBalance = useAuthStore((s) => s.deductBalance);
   const grade = user?.grade ?? "retail";
   const balance = user?.balance ?? 0;
   const orderTotal = total(grade);
@@ -31,10 +33,11 @@ function CartContent() {
   const handleOrder = () => {
     if (!canOrder) return;
     if (!confirm(`주문하시겠습니까?\n결제 금액: ${formatPrice(finalTotal)}\n주문 후 잔액: ${formatPrice(afterBalance)}`)) return;
-    setBalance(afterBalance);
+    const result = deductBalance(finalTotal);
+    if (!result) return alert("잔액이 부족합니다");
     clear();
     alert("주문이 완료되었습니다!");
-    window.location.href = "/mypage";
+    router.push("/mypage");
   };
 
   return (

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ShoppingCart, User, Search, LogOut } from "lucide-react";
+import { ShoppingCart, User, Search, LogOut, Wallet } from "lucide-react";
 import { useCartStore } from "@/store/cart";
 import { useAuthStore, gradeLabel } from "@/store/auth";
 import { formatPrice } from "@/data/products";
@@ -62,13 +62,24 @@ export default function Header() {
                   {gradeLabel[user.grade]}
                 </span>
 
-                {/* 잔액 */}
+                {/* 잔액 - sm 이상 */}
                 <Link
                   href="/charge"
                   className="hidden sm:block text-[13px] px-4 py-1.5 rounded-lg transition-all hover:border-[#CC0000]"
                   style={{ background: "rgba(204,0,0,0.1)", border: "1px solid rgba(204,0,0,0.2)", color: "var(--text)" }}
                 >
                   잔액 <strong className="text-[#CC0000] font-bold">{formatPrice(user.balance)}</strong>
+                </Link>
+
+                {/* 잔액 mini - 모바일 전용 */}
+                <Link
+                  href="/charge"
+                  className="sm:hidden flex items-center gap-1.5 text-[12px] px-2.5 py-1.5 rounded-lg transition-all"
+                  style={{ background: "rgba(204,0,0,0.1)", border: "1px solid rgba(204,0,0,0.2)", color: "var(--text)" }}
+                  aria-label={`잔액 ${formatPrice(user.balance)}`}
+                >
+                  <Wallet size={13} className="text-[#CC0000]" />
+                  <strong className="text-[#CC0000] font-bold">{formatPrice(user.balance)}</strong>
                 </Link>
 
                 {/* Cart */}
@@ -114,6 +125,20 @@ export default function Header() {
               </Link>
             )}
           </div>
+        </div>
+
+        {/* 모바일 전용 검색바 */}
+        <div
+          className="md:hidden flex items-center gap-2 rounded-lg px-3 py-2 mb-2"
+          style={{ background: "var(--input-bg)", border: "1px solid var(--input-border)" }}
+        >
+          <Search size={15} style={{ color: "var(--text-muted)" }} />
+          <input
+            type="text"
+            placeholder="부품번호, 차종, 브랜드 검색..."
+            className="bg-transparent border-none outline-none text-sm w-full"
+            style={{ color: "var(--text)" }}
+          />
         </div>
 
         {/* Nav row */}

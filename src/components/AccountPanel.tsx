@@ -7,6 +7,7 @@ import { formatPrice } from "@/data/products";
 /**
  * V2 NEW: 인증 후 샵 메인의 "내 계정 미니 패널"
  * 잔액, 진행중 주문, 자주 시킨 부품 재주문, 세금계산서 등 핵심 정보 한눈에
+ * 현재 일부 항목은 백엔드 미연동 상태 (Mock 데이터 제거됨)
  */
 export default function AccountPanel() {
   const user = useAuthStore((s) => s.user);
@@ -94,17 +95,16 @@ export default function AccountPanel() {
             </span>
           </div>
           <div className="text-base sm:text-lg font-black" style={{ color: "var(--text)" }}>
-            2건
+            0건
           </div>
           <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-            배송 추적 →
+            주문 내역
           </div>
         </Link>
 
         {/* 자주 시킨 부품 재주문 */}
-        <button
-          onClick={() => alert("재주문 기능은 곧 추가됩니다 (Mock)")}
-          className="rounded-xl p-3 text-left transition-all hover:border-[rgba(204,0,0,0.3)]"
+        <div
+          className="rounded-xl p-3 text-left opacity-60"
           style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)" }}
         >
           <div className="flex items-center gap-1.5 mb-1.5">
@@ -114,21 +114,21 @@ export default function AccountPanel() {
             </span>
           </div>
           <div className="text-[12px] font-bold leading-tight" style={{ color: "var(--text)" }}>
-            PRIME CERAMIC [후]
+            준비 중
           </div>
           <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-            지난 주문 →
+            곧 추가됩니다
           </div>
-        </button>
+        </div>
 
         {/* 세금계산서 */}
-        <button
-          onClick={() => alert("세금계산서는 매월 말 자동 발행됩니다 (Mock)")}
+        <Link
+          href="/mypage"
           className="rounded-xl p-3 text-left transition-all hover:border-[rgba(204,0,0,0.3)]"
           style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)" }}
         >
           <div className="flex items-center gap-1.5 mb-1.5">
-            <FileText size={12} style={{ color: "#0099ff" }} />
+            <FileText size={12} style={{ color: "#FFD600" }} />
             <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
               세금계산서
             </span>
@@ -139,7 +139,7 @@ export default function AccountPanel() {
           <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
             상세 →
           </div>
-        </button>
+        </Link>
       </div>
     </div>
   );
