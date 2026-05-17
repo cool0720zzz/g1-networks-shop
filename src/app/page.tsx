@@ -49,8 +49,10 @@ export default function Home() {
             muted
             loop
             playsInline
+            preload="metadata"
             className="w-full h-full object-cover"
           >
+            <source src="/hero-loop.webm" type="video/webm" />
             <source src="/hero-loop.mp4" type="video/mp4" />
           </video>
           {/* 어두운 오버레이 - 가독성 확보 */}
@@ -68,7 +70,7 @@ export default function Home() {
               <span className="text-[22px] font-black tracking-tight text-white">
                 G1 <span className="text-[#CC0000]">Networks</span>
               </span>
-              <span className="text-[10px] tracking-widest text-white/30">
+              <span className="text-[11px] tracking-widest text-white/30">
                 Automotive Parts Wholesale
               </span>
             </Link>
@@ -116,7 +118,7 @@ export default function Home() {
                     style={{ background: "rgba(0,0,0,0.5)" }}>
                     <div className="text-[28px] mb-2">{c.icon}</div>
                     <h4 className="text-[13px] font-bold mb-0.5 text-white">{c.title}</h4>
-                    <p className="text-[10px] text-white/50">{c.sub}</p>
+                    <p className="text-[11px] text-white/50">{c.sub}</p>
                   </Link>
                 ))}
               </div>
@@ -143,7 +145,7 @@ export default function Home() {
                     className="rounded-xl py-4 text-center transition-all hover:-translate-y-0.5"
                     style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(10px)" }}>
                     <div className="text-[13px] font-extrabold tracking-wider text-white">{p.logo}</div>
-                    <div className="text-[9px] tracking-widest uppercase text-white/40 mt-0.5">{p.desc}</div>
+                    <div className="text-[11px] tracking-widest uppercase text-white/40 mt-0.5">{p.desc}</div>
                   </div>
                 ))}
               </div>
@@ -159,7 +161,7 @@ export default function Home() {
           <section className="py-20 px-6" id="brands">
             <div className="max-w-[1070px] mx-auto">
               <div className="text-center mb-12">
-                <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Authorized Brands</span>
+                <span className="inline-block bg-[#CC0000] text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Authorized Brands</span>
                 <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>취급 브랜드</h2>
                 <p className="text-sm" style={{ color: "var(--text-muted)" }}>인증 정식 수입 브랜드만 취급합니다</p>
               </div>
@@ -169,7 +171,7 @@ export default function Home() {
                     <Link key={b.name} href="/products"
                       className="flex-1 flex items-center gap-4 rounded-[14px] p-6 transition-all hover:-translate-y-0.5 hover:border-[rgba(204,0,0,0.3)]"
                       style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
-                      <div className="w-14 h-14 rounded-xl flex items-center justify-center text-[10px] font-extrabold shrink-0"
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center text-[11px] font-extrabold shrink-0"
                         style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)", color: "var(--text-muted)", letterSpacing: "0.5px" }}>
                         {b.logo}
                       </div>
@@ -188,7 +190,7 @@ export default function Home() {
           <section className="py-20 px-6">
             <div className="max-w-[1070px] mx-auto">
               <div className="text-center mb-12">
-                <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Testimonials</span>
+                <span className="inline-block bg-[#CC0000] text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Testimonials</span>
                 <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>정비소가 선택한 이유</h2>
               </div>
               <div className="text-center py-12 rounded-2xl" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
@@ -202,7 +204,7 @@ export default function Home() {
           {/* Categories */}
           <section className="py-20 px-6" id="products">
             <div className="text-center mb-12">
-              <span className="inline-block bg-[#CC0000] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Products</span>
+              <span className="inline-block bg-[#CC0000] text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Products</span>
               <h2 className="text-[32px] font-black mb-2" style={{ color: "var(--text)" }}>취급 상품</h2>
               <p className="text-sm" style={{ color: "var(--text-muted)" }}>인증 정식 수입차 부품을 도매가로 제공합니다</p>
             </div>
@@ -216,7 +218,7 @@ export default function Home() {
                   <p className="text-[13px] leading-relaxed whitespace-pre-line" style={{ color: "var(--text-muted)" }}>{c.desc}</p>
                   <div className="flex gap-1.5 justify-center flex-wrap mt-3">
                     {c.brands.map((br) => (
-                      <span key={br} className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "rgba(204,0,0,0.08)", color: "#CC0000" }}>{br}</span>
+                      <span key={br} className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "rgba(204,0,0,0.08)", color: "#CC0000" }}>{br}</span>
                     ))}
                   </div>
                 </Link>

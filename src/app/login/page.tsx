@@ -118,7 +118,7 @@ export default function LoginPage() {
           >
             <div className="flex items-center gap-2 mb-5">
               <span
-                className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-md"
+                className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded-md"
                 style={{ background: accentBg, color: accent, border: `1px solid ${accentBorder}` }}
               >
                 {isWholesale ? "사업자 도매 로그인" : "일반 소매 로그인"}
@@ -223,7 +223,7 @@ export default function LoginPage() {
                   소매 계정 진입
                 </button>
               </div>
-              <p className="text-[10px] mt-2" style={{ color: "var(--text-dim)" }}>
+              <p className="text-[11px] mt-2" style={{ color: "var(--text-dim)" }}>
                 ID: wholesale / retail · PW: 1234
               </p>
             </div>

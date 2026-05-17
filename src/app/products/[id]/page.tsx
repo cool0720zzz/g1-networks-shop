@@ -61,7 +61,7 @@ function ProductDetailContent() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs text-[#CC0000] font-bold tracking-[2px] uppercase">{product.brand}</span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-md"
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-md"
                   style={{
                     background: grade === "wholesale" ? "rgba(204,0,0,0.15)" : "rgba(3,199,90,0.15)",
                     color: grade === "wholesale" ? "#ff5555" : "#03C75A",

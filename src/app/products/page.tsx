@@ -131,7 +131,7 @@ function ProductsContent() {
                         {p.brand} IMAGE
                         {showSaving && (
                           <span
-                            className="absolute top-2 right-2 text-[10px] font-bold px-2 py-1 rounded-md"
+                            className="absolute top-2 right-2 text-[11px] font-bold px-2 py-1 rounded-md"
                             style={{ background: "rgba(204,0,0,0.95)", color: "white" }}
                           >
                             도매가 -{Math.round((saving / p.prices.retail) * 100)}%
@@ -145,7 +145,7 @@ function ProductsContent() {
                         {/* [V2] 등급 라벨 + 가격 + (도매면 소매가 비교) */}
                         <div className="flex items-baseline gap-2">
                           <span
-                            className="text-[9px] font-bold px-1.5 py-0.5 rounded"
+                            className="text-[11px] font-bold px-1.5 py-0.5 rounded"
                             style={{
                               background: grade === "wholesale" ? "rgba(204,0,0,0.15)" : "rgba(3,199,90,0.15)",
                               color: grade === "wholesale" ? "#ff5555" : "#03C75A",
@@ -156,14 +156,14 @@ function ProductsContent() {
                           <span className="text-lg font-black text-[#CC0000]">{formatPrice(myPrice)}</span>
                         </div>
                         {showSaving && (
-                          <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+                          <div className="text-[11px] mt-0.5" style={{ color: "var(--text-muted)" }}>
                             <span className="line-through">{formatPrice(p.prices.retail)}</span>
                             {" "}→ <strong style={{ color: "#03C75A" }}>{formatPrice(saving)} 절약</strong>
                           </div>
                         )}
                         <div className="flex gap-1 flex-wrap mt-2">
                           {p.compatibleVehicles.map((v) => (
-                            <span key={v} className="text-[10px] px-2 py-0.5 rounded" style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)", color: "var(--text-sec)" }}>{v}</span>
+                            <span key={v} className="text-[11px] px-2 py-0.5 rounded" style={{ background: "var(--bg-card-hover)", border: "1px solid var(--border)", color: "var(--text-sec)" }}>{v}</span>
                           ))}
                         </div>
                       </div>

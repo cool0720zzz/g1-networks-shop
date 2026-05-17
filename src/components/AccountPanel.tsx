@@ -40,7 +40,7 @@ export default function AccountPanel() {
                 {user.name}님
               </span>
               <span
-                className="text-[10px] font-bold px-2 py-0.5 rounded-md"
+                className="text-[11px] font-bold px-2 py-0.5 rounded-md"
                 style={{
                   background: isWholesale ? "rgba(204,0,0,0.15)" : "rgba(3,199,90,0.15)",
                   color: isWholesale ? "#ff5555" : "#03C75A",
@@ -72,12 +72,12 @@ export default function AccountPanel() {
         >
           <div className="flex items-center gap-1.5 mb-1.5">
             <Wallet size={12} style={{ color: "#CC0000" }} />
-            <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
+            <span className="text-[11px] font-bold tracking-wide uppercase" style={{ color: "var(--text-muted)" }}>
               잔액
             </span>
           </div>
           <div className="text-base sm:text-lg font-black text-[#CC0000]">{formatPrice(user.balance)}</div>
-          <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+          <div className="text-[11px] mt-0.5" style={{ color: "var(--text-muted)" }}>
             + 충전하기
           </div>
         </Link>
@@ -90,14 +90,14 @@ export default function AccountPanel() {
         >
           <div className="flex items-center gap-1.5 mb-1.5">
             <Package size={12} style={{ color: "#03C75A" }} />
-            <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
+            <span className="text-[11px] font-bold tracking-wide uppercase" style={{ color: "var(--text-muted)" }}>
               진행중
             </span>
           </div>
           <div className="text-base sm:text-lg font-black" style={{ color: "var(--text)" }}>
             0건
           </div>
-          <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+          <div className="text-[11px] mt-0.5" style={{ color: "var(--text-muted)" }}>
             주문 내역
           </div>
         </Link>
@@ -109,14 +109,14 @@ export default function AccountPanel() {
         >
           <div className="flex items-center gap-1.5 mb-1.5">
             <Repeat size={12} style={{ color: "#FFD600" }} />
-            <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
+            <span className="text-[11px] font-bold tracking-wide uppercase" style={{ color: "var(--text-muted)" }}>
               빠른 재주문
             </span>
           </div>
           <div className="text-[12px] font-bold leading-tight" style={{ color: "var(--text)" }}>
             준비 중
           </div>
-          <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+          <div className="text-[11px] mt-0.5" style={{ color: "var(--text-muted)" }}>
             곧 추가됩니다
           </div>
         </div>
@@ -129,14 +129,14 @@ export default function AccountPanel() {
         >
           <div className="flex items-center gap-1.5 mb-1.5">
             <FileText size={12} style={{ color: "#FFD600" }} />
-            <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
+            <span className="text-[11px] font-bold tracking-wide uppercase" style={{ color: "var(--text-muted)" }}>
               세금계산서
             </span>
           </div>
-          <div className="text-[12px] font-bold" style={{ color: "var(--text)" }}>
-            {isWholesale ? "이번달 자동 발행" : "필요시 요청"}
+          <div className="text-[12px] font-bold whitespace-nowrap" style={{ color: "var(--text)" }}>
+            {isWholesale ? "자동 발행" : "필요시 요청"}
           </div>
-          <div className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+          <div className="text-[11px] mt-0.5" style={{ color: "var(--text-muted)" }}>
             상세 →
           </div>
         </Link>

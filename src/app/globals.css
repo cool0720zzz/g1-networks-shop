@@ -37,6 +37,14 @@ body {
   background: var(--bg);
   color: var(--text);
   font-feature-settings: "ss01";
+  word-break: keep-all;     /* 한글 단어 단위 줄바꿈 */
+  overflow-wrap: anywhere;   /* 너무 긴 영문/숫자는 wrap 허용 */
+  line-height: 1.6;          /* 기본 줄간격 한국어용 */
+}
+
+code, pre {
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 /* ===== HOVER EFFECTS ===== */

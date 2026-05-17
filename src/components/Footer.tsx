@@ -10,14 +10,14 @@ export default function Footer() {
             <div className="text-xl font-black mb-3" style={{ color: "var(--text)" }}>
               G1 <span className="text-[#CC0000]">Networks</span>
             </div>
-            <p className="text-xs leading-7" style={{ color: "var(--text-faint)" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--text-faint)" }}>
               G1네트웍스 | 대표: 양훈<br />
               사업자등록번호: 000-00-00000<br />
               주소: 서울특별시 OO구 OO로 00<br />
               고객센터: 02-0000-0000<br />
               이메일: contact@g1networks.co.kr
             </p>
-            <p className="text-[10px] mt-2" style={{ color: "var(--text-dim)" }}>
+            <p className="text-[11px] mt-2" style={{ color: "var(--text-dim)" }}>
               Design &amp; Management by AIB Corp.
             </p>
           </div>

@@ -45,7 +45,7 @@ export default function VehicleSearch() {
         <h3 className="text-[15px] font-bold" style={{ color: "var(--text)" }}>
           차종으로 빠르게 찾기
         </h3>
-        <span className="text-[10px] font-bold tracking-widest uppercase ml-auto" style={{ color: "var(--text-dim)" }}>
+        <span className="text-[11px] font-bold tracking-widest uppercase ml-auto" style={{ color: "var(--text-dim)" }}>
           Quick Search
         </span>
       </div>

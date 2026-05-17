@@ -4,8 +4,10 @@ import "./globals.css";
 
 const noto = Noto_Sans_KR({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "900"],
+  weight: ["400", "700", "900"],
   variable: "--font-noto",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
